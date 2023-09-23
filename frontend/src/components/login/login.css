@@ -1,0 +1,165 @@
+*{
+    margin :0;
+    padding: 0;
+}
+
+.rowFlex{
+    display: flex;
+    flex-direction: row;
+}
+
+.columnFlex{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-outer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1450px;
+    width: 100%;
+    height: 100vh;
+    gap: 150px;
+    flex-direction: row;
+    /* background-color: #ffffff; */
+    height: 100vh;
+    user-select: none;
+}
+
+.login-bg{
+    width: 500px;
+}
+
+.label-text{
+    z-index: 1;
+    margin-left: 10px;
+}
+
+.login-header-txt{
+    text-align: left;
+    font-weight: 700;
+    font-size: 30px;
+    color: #30c06b;
+}
+
+#email,#password{
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border:none;
+    padding-left: 30px;
+    padding-top: 25px;
+    margin-top: -25px;
+    box-shadow: 0px 2px 5px -2px #30c06b;
+}
+
+#email:focus,#password:focus{
+    outline: none;
+}
+
+.Login-main-div{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 400px;
+    padding: 30px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.submit-btn-p{
+    text-align: left;
+}
+
+.or-txt{
+    text-align: center;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.login-submit-btn{
+    width: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    border:none;
+    height: 40px;
+    cursor: pointer;
+    color: #ffffff;
+    box-shadow: 0px 1px 5px -2px #30c06b;
+    background-color: #30c06b;
+}
+
+.login-submit-btn:hover{
+    transition: 0.5s;
+    border-radius: 50px 0px 50px 0px;
+}
+
+.login-submit-btn:not(:hover){
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.navbtn-signup {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: #3a415a;
+    font-size: 15px;
+    text-decoration-line: underline;
+}
+
+.font-awsome-icon {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: -32px;
+    width: fit-content;
+}
+
+.img-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#continue-google {
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    border: none;
+    background-color: #e8282e;
+    cursor: pointer;
+}
+
+#continue-google:hover{
+    transition: 0.5s;
+    border-radius: 50px;
+}
+
+#continue-google:not(:hover){
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.fa-google {
+    color: #ffffff;
+  }
+
+  .OtherOption{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .appicon{
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    width: 200px;
+  }

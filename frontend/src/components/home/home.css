@@ -1,0 +1,168 @@
+.main-out-block{
+    height: 100vh;
+    user-select: none;
+}
+
+.Main-header-nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    padding-right: 100px;
+}
+
+.inner-home-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 100px;
+    gap: 100px;
+}
+
+.appicon-nav{
+    width: 200px;
+}
+
+.home-homebg{
+    height: 80vh;
+}
+
+.main-txt-color{
+    color: #30c06b;
+}
+
+.main-txt-white-color{
+    font-weight: 700;
+    font-size: 60px;
+    color: #34344e;
+}
+
+.home-content-main{
+    gap: 10px;
+}
+
+.home-btn-shownow{
+    padding: 10px;
+    border:none;
+    border-radius: 5px;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #fff0f0;
+    background-color: #30c06b;
+    cursor: pointer;
+}
+
+.home-btn-shownow:hover,.home-btn-setlocation:hover{
+    opacity: 80%;
+}
+
+.treesvg-img{
+    width:60px;
+}
+
+.nav-content-reference{
+    gap: 50px;
+}
+
+.nav-btn{
+    border-radius: 5px;
+    padding: 10px;
+    background: transparent;
+    font-weight: 500;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.nav-btn-active{
+    border-radius: 5px;
+    padding: 10px;
+    background: transparent;
+    color: #279b57;
+    font-weight: 500;
+    border: none;
+    transform: scale(1.1);
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.search-block-home{
+    gap: 40px;
+    align-items: baseline;
+}
+
+.searchInput-home {
+    width: 400px;
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    font-size: 17px;
+    box-shadow: 0px 3px 5px -3px #1d7440;
+}
+
+.searchInput-home:focus{
+   outline: none;
+}
+
+.search-back-btn-home{
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #34344e;
+    background: transparent;
+}
+
+.home-btn-setlocation{
+    padding: 10px;
+    border:none;
+    border-radius: 5px;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: #fff0f0;
+    background-color: #30c06b;
+    cursor: pointer;
+}
+
+.setlocation-div{
+    gap: 20px;
+    align-items: center;
+}
+
+.location-nav-content{
+    padding: 10px;
+    gap:10px;
+    width: 300px;
+    border:none;
+    align-items: center;
+    box-shadow: 0px 0px 5px -2px #30c06b;
+    border-radius: 5px;
+}
+
+.fa-location-dot{
+    color: #30c06b;
+}
+
+.suggestionBox-location {
+    width: 430px;
+    padding: 15px;
+    margin-top: 43px;
+    background: #ffffff;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0px 3px 5px -2px #30c06b;
+    position: absolute;
+    z-index: 1;
+    border: none;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.button-loading-home{
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background-color: #30c06b;
+    color: #ffffff;
+    border-radius: 5px;
+}

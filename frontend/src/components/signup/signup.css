@@ -1,0 +1,143 @@
+*{
+    margin :0;
+    padding: 0;
+}
+
+
+
+.rowFlex{
+    display: flex;
+    flex-direction: row;
+}
+
+.columnFlex{
+    display: flex;
+    flex-direction: column;
+}
+
+.main-outer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1450px;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+}
+
+.label-text{
+    z-index: 1;
+    margin-left: 10px;
+}
+
+#email,#password,#cpassword,#fname,#lname{
+    height: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    border:none;
+    padding-left: 30px;
+    padding-top: 25px;
+    margin-top: -25px;
+    box-shadow: 0px 2px 5px -2px #30c06b ;
+}
+
+.navbtn-login {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: #3a415a;
+    font-size: 15px;
+    text-decoration-line: underline;
+}
+
+input::-webkit-input-placeholder {
+    opacity: 0.8; 
+    font-weight: 500;
+
+}
+
+#email:focus,#password:focus,#cpassword,#fname,#lname{
+    outline:none;
+}
+
+.signup-header-txt{
+    text-align: left;
+    font-weight: 700;
+    font-size: 25px;
+    /* margin-bottom: -20px; */
+    color: #30c06b;
+}
+
+.or-txt{
+    text-align: center;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.signup-main-div{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 400px;
+    padding: 30px;
+    padding-left: 100px;
+    border-radius: 10px;
+    justify-content: center;
+}
+
+span.status-condition {
+    background: #00b40050;
+    border-radius: 5px;
+    width:380px;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: -20px;
+    margin-top: -10px;
+    padding: 10px;
+    font-weight: 500;
+    color: #3a415a;
+}
+
+span.status-condition-fail {
+    background: #e8282e50;
+    border-radius: 5px;
+    width: 380px;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: -20px;
+    margin-top: -10px;
+    padding: 10px;
+    font-weight: 500;
+    color: #3a415a;
+}
+
+.submit-btn-p{
+    text-align: left;
+}
+
+.signup-submit-btn{
+    width: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    border:none;
+    height: 40px;
+    cursor: pointer;
+    color: #ffffff;
+    box-shadow: 0px 1px 5px 0px #30c06b;
+    background-color: #30c06b;
+}
+
+.signupbg{
+    width: 500px;
+}
+
+.signup-submit-btn:hover{
+    transition: 0.5s;
+    border-radius: 50px 0px 50px 0px;
+}
+
+.signup-submit-btn:not(:hover){
+    transition: 0.5s;
+    border-radius: 5px;
+}
