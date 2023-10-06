@@ -34,9 +34,12 @@ mongoose.connect(monogourl,{
 
 const loginRoutes = require('./routes/loginRoutes')
 const signupRoutes = require('./routes/signupRoutes')
+const homeRoutes = require('./routes/homeRoutes')
 const retailLoginRoutes = require('./routes/RetailRoutes/loginRoutes')
 const retailHomeRoutes = require('./routes/RetailRoutes/homeRoutes')
-const retailAddProductRoutes = require('./routes/RetailRoutes/addProductRoutes')
+const retailProductRoutes = require('./routes/RetailRoutes/ProductRoutes')
+const retailProfileRoutes = require('./routes/RetailRoutes/profileRoutes')
+
 
 // require('./routes/googleSignup')
 app.use(session({secret:secret}))
@@ -45,9 +48,11 @@ app.use(passport.session())
 
 app.use(loginRoutes)
 app.use(signupRoutes)
+app.use(homeRoutes)
 app.use(retailLoginRoutes)
 app.use(retailHomeRoutes)
-app.use(retailAddProductRoutes)
+app.use(retailProductRoutes)
+app.use(retailProfileRoutes)
 
 
 app.listen(port,()=>{

@@ -28,6 +28,7 @@ const Login =()=>{
         setUserDatas((oldVAlue)=>{return {...oldVAlue,[name] : value}})
     }
     
+    console.log("UD : ",userData);
 
     async function getLogin (e){
       e.preventDefault();
