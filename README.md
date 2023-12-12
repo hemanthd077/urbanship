@@ -17,7 +17,6 @@ Problem Solving: Discuss your problem-solving skills in the context of Urbanship
 <h4>Developer Account : </h4>
 <div>
 <a href="https://www.linkedin.com/in/hemanth-dhanamadhavan-39a2a31b5" target="blank"><img align="center" src="https://img.icons8.com/?size=512&id=13930&format=png" alt="" height="40" width="40" /></a>
-  <a href="https://www.naukri.com/mnjuser/profile?id=&altresid" target="blank" ><img align="center" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHnuoBILG49vKRO7VNKERfU1t5tuT9QFowe0RpLRXDUS6Qy_Tea-RHUrwX9WHx3glSbTk&usqp=CAU" alt="" height="30" width="30"  style="border-radius:50" /></a>
 <a href="https://github.com/hemanthd077" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="" height="30" width="30" /></a>
 <a href="https://leetcode.com/HemanthD77/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="" height="30" width="30" /></a>
 <a href="mailto:hemanthmadhavan77@gmail.com" target="blank"><img align="center" src="https://img.icons8.com/?size=512&id=P7UIlhbpWzZm&format=png" alt="" height="40" width="30" /></a>   
