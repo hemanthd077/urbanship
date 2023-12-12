@@ -1,36 +1,35 @@
-import * as React from 'react';
-import {Image} from 'react-native'
+import * as React from "react";
+import { Image } from "react-native";
 
 //navigator
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
 
 //screens
-import Login from './screens/scr/login'
-import Signup from './screens/scr/signup'
-import Home from './screens/scr/home'
-import Loading from './screens/scr/Loading'
-import Profile  from './screens/scr/profile'
-import Cart  from './screens/scr/cart'
-
+import Login from "./screens/scr/login";
+import Signup from "./screens/scr/signup";
+import Home from "./screens/scr/home";
+import Loading from "./screens/scr/Loading";
+import Profile from "./screens/scr/profile";
+import ShopResult from "./screens/scr/ShopResult";
+import Cart from "./screens/scr/cart";
 
 function Logo() {
   return (
     <Image
-      source={require('./assets/logo-no-background.png')}
+      source={require("./assets/logo-no-background.png")}
       style={{ width: 120, height: 25 }}
     />
   );
 }
 
-
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
           name="Loading"
           component={Loading}
           options={{
@@ -60,29 +59,40 @@ export default function App() {
             headerBackVisible: false,
           }}
         /> 
-        <Stack.Screen 
-          name="Home" 
+        <Stack.Screen
+          name="Home"
           component={Home.Home}
           options={{
-            headerShown: false
-          }} 
+            headerShown: false,
+          }}
         />
-        <Stack.Screen 
-          name="Profile" 
+        <Stack.Screen
+          name="Profile"
           component={Profile}
           options={{
             headerBackVisible: true,
-            headerTintColor:"#30c06b",
-            title:null,
+            headerTintColor: "#30c06b",
+            title: null,
             headerShadowVisible: false,
-          }} 
+          }}
         />
-        <Stack.Screen 
-          name="Cart" 
+        <Stack.Screen
+          name="ShopResult"
+          component={ShopResult}
+          options={({ route }) => ({
+            title: `Product ${route.params.ProductIndex}`,
+            headerShown: false,
+          })}
+        />
+        <Stack.Screen
+          name="Cart"
           component={Cart}
-          options={{
-            headerShown: false
-          }} 
+          options={({ route }) => ({
+            headerBackVisible: true,
+            headerTintColor: "#30c06b",
+            title: "Your Cart",
+            headerShadowVisible: false,
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

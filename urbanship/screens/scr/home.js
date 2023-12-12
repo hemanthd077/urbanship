@@ -10,7 +10,7 @@ import {
   RefreshControl,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { BASE_URL } from "@env";
+import { BASE_URL_RN } from "@env";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
@@ -27,7 +27,8 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import Axios from "axios";
 
 import { FontAwesome } from "@expo/vector-icons";
-import Cart from './cart'
+import Appicon from '../../assets/logoicon-no-background.png'
+import ComingSoon from '../../assets/images/ComingSoonSvg'
 
 const RatingStar = ({ rating }) => {
   const starIcons = [];
@@ -92,7 +93,7 @@ const HomeNav = () => {
   );
 
   async function userLandmarkFetch() {
-    await Axios.get(`${BASE_URL}userLandmarkFetch`).then((result) => {
+    await Axios.get(`${BASE_URL_RN}userLandmarkFetch`).then((result) => {
       setLocationData(result.data.Landmark);
     });
   }
@@ -105,7 +106,8 @@ const HomeNav = () => {
     <View style={styles.HeaderBlockView}>
       <View style={styles.OuterLocationView}>
         <TouchableOpacity>
-          <FontAwesomeIcon style={styles.iconStyle} icon={faLocationDot} />
+          <Image source={Appicon} style={{width:25 , height:25}}/>
+          {/* <FontAwesomeIcon style={styles.iconStyle} icon={faLocationDot} /> */}
         </TouchableOpacity>
         <View style={styles.LocationInnerDiv}>
           <Text style={{ fontSize: 18, fontWeight: 700 }}>Location</Text>
@@ -125,7 +127,7 @@ const HomeNav = () => {
   );
 };
 
-const Home = () => {
+const Home = ({navigation}) => {
   const [enteredText, setEnteredText] = useState("");
   const [placeholder, setPlaceholder] = useState("Search the Location");
   const [suggestions, setSuggestions] = useState([]);
@@ -134,15 +136,14 @@ const Home = () => {
   const [resultData, setResultData] = useState([]);
   const [resultDataStatus, setResultDataStatus] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
-  const [currentScreenStatus, setCurrentScreenStatus] = useState(false);
 
   async function userLandmarkFetch() {
-    await Axios.get(`${BASE_URL}userLandmarkFetch`).then((result) => {
+    
+    await Axios.get(`${BASE_URL_RN}userLandmarkFetch`).then((result) => {
       setEnteredText(result.data.Landmark);
     });
   }
 
-  useEffect(() => {}, [currentScreenStatus]);
 
   useEffect(() => {
     userLandmarkFetch();
@@ -150,8 +151,8 @@ const Home = () => {
 
   async function fetchShopData() {
     setRefreshing(true);
-    await Axios.get(`${BASE_URL}productShopSearch`).then((response) => {
-      // console.log("availShopData : ",response.data.availShopData);
+    
+    await Axios.get(`${BASE_URL_RN}productShopSearch`).then((response) => {
       setResultData(response.data.availShopData);
     });
     setTimeout(() => {
@@ -205,7 +206,7 @@ const Home = () => {
   async function assignLocationValue(suggestion) {
     setEnteredText(suggestion);
     setSuggestionsClickStatus(!suggestionsClickStatus);
-    await Axios.post(`${BASE_URL}userLandmarkSet`, {
+    await Axios.post(`${BASE_URL_RN}userLandmarkSet`, {
       Location: suggestion,
     }).then((response) => {});
     setResultDataStatus(!resultDataStatus);
@@ -232,14 +233,17 @@ const Home = () => {
   useEffect(() => {}, [suggestions, suggestionsStatus]);
 
   const CurrentPageChange = () => {
-    setCurrentScreenStatus(!currentScreenStatus);
+    navigation.navigate("Cart")
+  };
+
+  const productHandleClick = async (productIndex) => {
+    navigation.navigate('ShopResult', { ProductIndex: productIndex });
   };
 
   return (
     <View style={styles.Container}>
-      {currentScreenStatus ? (
         <>
-          <HomeNav />
+          <View style={{marginHorizontal:10}}><HomeNav /></View>
           <View style={styles.searchBox}>
             <Text>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -252,7 +256,6 @@ const Home = () => {
               value={enteredText}
             />
           </View>
-          {/* <View> */}
             {enteredText.length > 0 &&
             suggestionsStatus === true &&
             suggestionsClickStatus ? (
@@ -277,7 +280,6 @@ const Home = () => {
             ) : (
               <></>
             )}
-          {/* </View> */}
 
           <View style={styles.ShopDataOuter}>
             {resultData.length > 0 ? (
@@ -290,8 +292,11 @@ const Home = () => {
                 <FlatList
                   data={resultData}
                   keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
-                    <TouchableOpacity style={styles.shopInnerContainer}>
+                  renderItem={({ item,index }) => (
+                    <TouchableOpacity 
+                      style={styles.shopInnerContainer}
+                      onPress={() => productHandleClick(index)}
+                    >
                       <View>
                         <Text style={styles.ShopTitleContent}>{item[1]}</Text>
                         <RatingStar rating={item[3]} />
@@ -314,26 +319,24 @@ const Home = () => {
                     <RefreshControl
                       refreshing={refreshing}
                       onRefresh={fetchShopData}
+                      style={styles.GroupContainerValue}
                     />
                   }
                 />
               </>
             ) : (
-              <></>
+              <View style={styles.NoshopAvail}>
+                <ComingSoon/>
+                <Text style={styles.NoshopAvailTxt}>We are Working to Bring our service to Your Location 🌴🌴</Text>
+              </View>
             )}
           </View>
         </>
-      ) : (
-        <View style={styles.CartSectionOuterContainer}>
-          <Cart/>
-        </View>
-      )}
 
       {/* footer */}
       <View style={styles.HomeFooterBlock}>
-        {currentScreenStatus ? (
           <>
-            <TouchableOpacity style={styles.HomeFooterContent}>
+            <TouchableOpacity style={styles.HomeFooterContentShops}>
               <Text>
                 <FontAwesomeIcon
                   style={styles.HomeFooterContenttextActive}
@@ -342,9 +345,8 @@ const Home = () => {
               </Text>
               <Text style={styles.HomeFooterContenttextActive}>Shops</Text>
             </TouchableOpacity>
-            <Text style={styles.footerDividerLine}></Text>
             <TouchableOpacity
-              style={styles.HomeFooterContent}
+              style={styles.HomeFooterContentCart}
               onPress={CurrentPageChange}
             >
               <Text>
@@ -353,29 +355,6 @@ const Home = () => {
               <Text style={styles.HomeFooterContenttext}>Cart</Text>
             </TouchableOpacity>
           </>
-        ) : (
-          <>
-            <TouchableOpacity
-              style={styles.HomeFooterContent}
-              onPress={CurrentPageChange}
-            >
-              <Text>
-                <FontAwesomeIcon style={styles.HomeFooterContenttext} icon={faShop} />
-              </Text>
-              <Text style={styles.HomeFooterContenttext}>Shops</Text>
-            </TouchableOpacity>
-            <Text style={styles.footerDividerLine}></Text>
-            <TouchableOpacity style={styles.HomeFooterContent}>
-              <Text>
-                <FontAwesomeIcon
-                  style={styles.HomeFooterContenttextActive}
-                  icon={faCartShopping}
-                />
-              </Text>
-              <Text style={styles.HomeFooterContenttextActive}>Cart</Text>
-            </TouchableOpacity>
-          </>
-        )}
       </View>
     </View>
   );
@@ -388,10 +367,27 @@ export default HomeContent;
 const styles = StyleSheet.create({
   Container: {
     paddingTop: 30,
-    paddingHorizontal: 10,
     flex: 1,
     backgroundColor: "#ffffff",
-    gap: 10,
+    justifyContent:"center",
+  },
+  NoshopAvail:{
+    flexDirection:"column",
+    alignContent:"center",
+    alignItems:"center",
+    justifyContent:"center",
+  },
+  NoshopAvailTxt:{
+    position:"absolute",
+    top:500,
+    width:320,
+    fontSize:17,
+    fontWeight:"700",
+    textAlign:"center",
+    color:"#34344e",
+  },
+  GroupContainerValue:{
+    flex:1,
   },
   shopHeart: {
     color: "#30c06b",
@@ -408,29 +404,27 @@ const styles = StyleSheet.create({
     bottom: 5,
     left: 5,
     transform: [{ scale: 1.3 }],
-    padding: 5,
-    backgroundColor: "#ffffff",
-    borderRadius: 50,
-    elevation: 1,
   },
   ShopTitleContent: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "500",
-    width: 220,
+    maxWidth: 150,
+    paddingRight:20,
     flexWrap: "wrap",
-    color: "#1d7440",
   },
   shopOuterContainer: {
     flexDirection: "column",
+    paddingBottom:50,
+    paddingHorizontal:10,
   },
   shopLogoImage: {
     width: 100,
     borderRadius: 5,
-    height: 120,
+    height: 110,
   },
   HomeFooterContenttext: {
     fontWeight:"700",
-    opacity:0.8,
+    color:"#30c06b",
   },
   HomeFooterContenttextActive:{
     color: "#ffffff",
@@ -445,6 +439,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     backgroundColor: "#f8f8f8",
     padding: 20,
+    elevation:0.3,
   },
   ProductHeaderText: {
     textAlign: "center",
@@ -461,27 +456,52 @@ const styles = StyleSheet.create({
   suggestionBox: {
     backgroundColor: "#f8f8f8",
     position: "absolute",
-    top: 140,
-    left: 10,
-    width: 370,
+    top: 138,
+    marginHorizontal:15,
     padding: 10,
     zIndex: 1,
-    marginTop: -20,
+    minWidth:362,
+    flex:1,
+    paddingLeft:20,
+    marginTop: -30,
+    flexDirection:"row",
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
-    elevation: 5,
+    elevation: 3,
   },
   suggestionContentBox: {
     alignContent: "center",
     marginTop: 5,
   },
-  HomeFooterContent: {
+  HomeFooterContentShops:{
     padding: 8,
     flexDirection: "row",
     gap: 5,
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     marginBottom: 5,
+    borderWidth:1,
+    borderRightWidth:0,
+    borderColor:"#30c06b",
+    backgroundColor:"#30c06b",
+    width:160,
+    paddingRight : 20,
+    borderTopLeftRadius:50,
+  },
+  HomeFooterContentCart:{
+    padding: 8,
+    flexDirection: "row",
+    gap: 5,
+    alignContent: "center",
+    justifyContent: "flex-start",
+    backgroundColor:"#f8f8f8",
+    marginBottom: 5,
+    borderWidth:1,
+    borderLeftWidth:0,
+    width:160,
+    paddingLeft : 20,
+    borderColor:"#30c06b99",
+    borderTopRightRadius:50,
   },
   searchBoxInput: {
     width: 310,
@@ -489,18 +509,19 @@ const styles = StyleSheet.create({
   searchBox: {
     justifyContent: "flex-start",
     padding: 8,
+    paddingLeft:20,
     alignItems: "center",
     borderRadius: 30,
     flexDirection: "row",
     gap: 10,
     zIndex: 2,
-    width: 370,
-    paddingHorizontal: 20,
+    marginHorizontal:15,
     backgroundColor: "#f8f8f8",
+    
   },
   rowFlexSuggestion: {
     flexDirection: "row",
-    gap: 5,
+    gap: 10,
     height: 55,
     fontSize: 18,
     paddingVertical: 10,
@@ -538,13 +559,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignContent: "center",
     justifyContent: "center",
-    gap: 15,
     transform: [{ scale: 1.3 }],
-    backgroundColor: "#30c06b",
-    color: "#ffffff",
+    // backgroundColor: "#30c06b",
+    // backgroundColor: "#cbdad5",
     borderTopLeftRadius: 100,
     borderTopRightRadius: 100,
-    marginHorizontal: 30,
+    marginHorizontal: 40,
+    position:"absolute",
+    zIndex:2,
+    bottom:0,
   },
 
   CartSectionOuterContainer:{

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { BASE_URL } from "@env";
+import { BASE_URL_RN } from "@env";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
@@ -33,7 +33,8 @@ const Login = ({ navigation }) => {
     console.log("Login button pressed");
     e.preventDefault();
     try {
-      await Axios.post(`${BASE_URL}login`, {
+      console.log(BASE_URL_RN+"login");
+      await Axios.post(`${BASE_URL_RN}login`, {
         userData: userData,
       }).then((response) => {
         if (response.status === 200) {

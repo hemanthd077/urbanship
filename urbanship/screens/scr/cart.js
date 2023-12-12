@@ -16,7 +16,7 @@ import {
   faMinus,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
-import { BASE_URL } from "@env";
+import { BASE_URL_RN } from "@env";
 import Axios from "axios";
 import HomeContent from "./home";
 
@@ -24,13 +24,13 @@ import VegImageIcon from "../../assets/images/vegIconSvg";
 import NonVegImageIcon from "../../assets/images/nonVegIconSvg";
 import CartEmptyIcon from "../../assets/images/cartEmptySvg";
 
-const Cart = ({ navigation }) => {
+const Cart = () => {
   const [cartData, setCartData] = useState([]);
   const [totalCartAmount, setTotalCartAmount] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
   async function fetchCartData() {
-    await Axios.get(`${BASE_URL}FetchCartData`)
+    await Axios.get(`${BASE_URL_RN}FetchCartData`)
       .then((response) => {
         setCartData(response.data.CartData);
         setTotalCartAmount(response.data.TotalAmount);
@@ -39,7 +39,7 @@ const Cart = ({ navigation }) => {
   }
 
   async function UpdateCartfn(ProductId, Status) {
-    await Axios.post(`${BASE_URL}UpdateCartData`, {
+    await Axios.post(`${BASE_URL_RN}UpdateCartData`, {
       ProductId: ProductId,
       Status: Status,
     }).then((response) => {
@@ -59,7 +59,6 @@ const Cart = ({ navigation }) => {
 
   return (
     <View style={styles.OuterContainer}>
-      <Text style={styles.cartTitle}>Your Cart</Text>
       {cartData.length > 0 ? (
         <>
           <FlatList
@@ -144,7 +143,10 @@ const Cart = ({ navigation }) => {
       ) : (
         <View style={styles.cartEmptyContainer}>
           <CartEmptyIcon/>
-          <Text style={styles.cartEmptyContainerTxt}>Your cart is empty do add some thing</Text>
+          <View style={styles.cartEmptyContainerTxt}>
+            <Text>Your cart is empty!!</Text>
+            <Text>Add Product, start Ordering</Text>
+          </View>
         </View>
       )}
     </View>
@@ -155,8 +157,10 @@ export default Cart;
 
 const styles = StyleSheet.create({
   OuterContainer: {
-    height: 776,
     flexDirection: "column",
+    paddingHorizontal:10,
+    flex:1,
+    backgroundColor:"#ffffff",
   },
   typeIconResultPage: {
     width: 25,
@@ -236,10 +240,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     padding: 10,
+    paddingVertical:20,
     paddingHorizontal: 20,
-    backgroundColor: "#f8f8f8",
     borderRadius: 5,
-    marginBottom: 30,
   },
   AmountContent: {
     alignContent: "center",
@@ -255,6 +258,7 @@ const styles = StyleSheet.create({
   },
   checkoutButtonText: {
     color: "#ffffff",
+    paddingHorizontal:20,
   },
   totalCostPopupContent: {
     alignContent: "center",
@@ -275,5 +279,7 @@ const styles = StyleSheet.create({
   },
   cartEmptyContainerTxt:{
     fontSize:18,
+    flexDirection:"column",
+    alignItems:"center",
   },
 });
